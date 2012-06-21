@@ -1,37 +1,42 @@
 {
-    "name" : "resolve",
-    "description" : "A more hookable require.resolve() implementation",
-    "version" : "0.2.2",
-    "repository" : {
-        "type" : "git",
-        "url" : "git://github.com/substack/node-resolve.git"
-    },
-    "main" : "index.js",
-    "keywords" : [
-        "resolve",
-        "require",
-        "node",
-        "module"
-    ],
-    "directories" : {
-        "lib" : ".",
-        "example" : "example",
-        "test" : "test"
-    },
-    "scripts" : {
-        "test" : "tap test/*.js"
-    },
-    "dependencies" : {},
-    "devDependencies" : {
-        "tap" : "~0.2.4"
-    },
-    "engines" : {
-        "node" : ">=0.4.0"
-    },
-    "license" : "MIT",
-    "author" : {
-        "name" : "James Halliday",
-        "email" : "mail@substack.net",
-        "url" : "http://substack.net"
-    }
+	"name" : "node-module-resolver",
+	"description" : "Asynchronous require.resolve() implementation",
+	"version" : "0.1.0",
+	"repository" : {
+		"type" : "git",
+		"url" : "git://git.voodoowarez.com/node-module-resolver.git"
+	},
+	"main" : "index.js",
+	"keywords" : [
+		"resolve",
+		"require",
+		"node",
+		"module"
+	],
+	"directories" : {
+		"lib" : ".",
+		"example" : "example",
+		"test" : "test"
+	},
+	"scripts" : {
+		"test" : "tap test/*.js"
+	},
+	"dependencies" : {},
+	"devDependencies" : {
+		"tap" : "~0.2.4"
+	},
+	"engines" : {
+		"node" : ">=0.4.0"
+	},
+	"license" : "MIT",
+	"author": {
+		"name": "rektide",
+		"email": "rektide@voodoowarez.com",
+		"url": "http://voodoowarez.com"
+	},
+	"contributors" : [{
+		"name" : "James Halliday",
+		"email" : "mail@substack.net",
+		"url" : "http://substack.net"
+	}]
 }
