@@ -10,18 +10,21 @@ var core = exports.core = [
 	'sys', 'timers', 'tls', 'tty', 'url', 'util', 'vm', 'zlib'
 ].reduce(function (acc, x) { acc[x] = true; return acc }, {});
 
-exports.isCore = function (x) { return core[x] };
 
-exports.async = function (x, opts, cbDone) {
-	if (core[x]) return x;
-	
+module.exports = function (x, opts, cbDone) {
+	if (core[x]) {
+		cbDone(x,x);
+		return;
+	}
 	if (!opts) opts = {};
+
 	var isFile = opts.isFile || function (file,cb) {
 		fs.stat(file, function(err,stats) {
 			if (stats && stats.isFile()) {
 				cb()
-			} else
+			} else {
 				cb(true)
+			}
 		})
 	};
 	var readFile = opts.readFile || fs.readFile;
@@ -30,6 +33,7 @@ exports.async = function (x, opts, cbDone) {
 	var y = opts.basedir
 		|| path.dirname(require.cache[__filename].parent.filename)
 	;
+	var z= x;
 
 	opts.paths = opts.paths || [];
 
@@ -59,7 +63,7 @@ exports.async = function (x, opts, cbDone) {
 			}
 			// no, don't even pass back the success case, they just had to finish.
 			//cb(undefined,x+extension[i])
-			cbDone(x+extensions[i])
+			cbDone(x+extensions[i],z)
 		})
 	}
 	
@@ -123,7 +127,7 @@ exports.async = function (x, opts, cbDone) {
 		var dirs = nodeModulesPaths(start);
 		_loadNodeModules(x, dirs, function(err){
 			// true failure
-			cbDone()
+			cbDone(undefined,z)
 		})
 	}
 
@@ -143,6 +147,10 @@ exports.async = function (x, opts, cbDone) {
 			}
 			dirs.push(dir);
 		}
-		return opts.paths.concat(dirs);
+		return dirs.concat(opts.paths)
 	}
 };
+
+module.exports.async= module.exports
+
+module.exports.isCore = function (x) { return core[x] };
